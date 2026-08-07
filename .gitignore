@@ -126,6 +126,13 @@ all.config
 # fetched Android config fragments
 kernel/configs/android-*.cfg
 
+#post-build files
+*.rej
+*.orig
+*.patch
+out/
+toolchain/
+
 # local build outputs/toolchains
 /build/out/
 /out/
