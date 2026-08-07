@@ -5739,7 +5739,7 @@
 					type = "active";
 				};
 				big_control_temp: big-control-temp {
-					temperature = <83000>; /* millicelsius */
+					temperature = <72000>; /* millicelsius */
 					hysteresis = <5000>; /* millicelsius */
 					type = "passive";
 				};
@@ -5804,7 +5804,7 @@
 					type = "active";
 				};
 				mid_control_temp: mid-control-temp {
-					temperature = <83000>; /* millicelsius */
+					temperature = <75000>; /* millicelsius */
 					hysteresis = <5000>; /* millicelsius */
 					type = "passive";
 				};
@@ -5946,12 +5946,12 @@
 					type = "active";
 				};
 				gpu_switch_on: gpu-switch-on {
-					temperature = <78000>; /* millicelsius */
+					temperature = <65000>; /* millicelsius */
 					hysteresis = <2000>; /* millicelsius */
 					type = "active";
 				};
 				gpu_control_temp: gpu-control-temp {
-					temperature = <88000>; /* millicelsius */
+					temperature = <74000>; /* millicelsius */
 					hysteresis = <5000>; /* millicelsius */
 					type = "passive";
 				};
