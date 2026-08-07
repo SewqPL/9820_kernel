@@ -6,7 +6,7 @@ on:
       model:
         description: Model (code + device name)
         required: true
-        default: beyondx (Galaxy S10 5G)
+        default: beyond1lte (Galaxy S10)
         type: choice
         options:
           - beyond0lte (Galaxy S10e)
@@ -41,7 +41,7 @@ on:
       gpu_max:
         description: "GPU max MHz (for OC tables, default: 702)"
         required: true
-        default: "702"
+        default: "962"
         type: choice
         options:
           - "100"
