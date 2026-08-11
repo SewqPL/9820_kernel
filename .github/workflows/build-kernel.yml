@@ -144,25 +144,6 @@ jobs:
           echo "🔧 Using susfs-rksu-master branch for KernelSU"
           curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s susfs-rksu-master
 
-      - name: "Clone susfs4ksu repository"
-        run: |
-          git clone https://github.com/Star-Seven/susfs4ksu -b M62-backport-Susfs susfs4ksu-repo
-
-      - name: "Apply susfs-rksu-master patches"
-        run: |
-           set -e
-
-           echo "Applying susfs-rksu-master specific patches..."
-           echo "Copying files"
-           cp susfs4ksu-repo/kernel_patches/fs/* fs/
-           cp susfs4ksu-repo/kernel_patches/include/linux/* include/linux/
-           echo "Finished copying files"
-
-           echo "Applying 50_add_susfs_in_kernel-4.14"
-           patch -p1 --verbose < susfs4ksu-repo/kernel_patches/50_add_susfs_in_kernel-4.14.patch
-           echo "Finished 50_add_susfs_in_kernel-4.14"
-           echo "Successfully applied susfs-rksu-master patches"
-
       - name: Build kernel
         run: |
           chmod +x build.sh
