@@ -153,11 +153,19 @@ jobs:
            set -e
 
            echo "Applying susfs-rksu-master specific patches..."
+           echo "Copying files"
            cp susfs4ksu-repo/kernel_patches/fs/* fs/
            cp susfs4ksu-repo/kernel_patches/include/linux/* include/linux/
-           
+           echo "Finished copying files"
+
+           echo "Applying kernel-4.14.patch"
            patch -p1 --verbose < susfs4ksu-repo/kernel_patches/kernel-4.14.patch
+           echo "Finished kernel-4.14.patch"
+
+
+           echo "Applying 50_add_susfs_in_kernel-4.14"
            patch -p1 --verbose < susfs4ksu-repo/kernel_patches/50_add_susfs_in_kernel-4.14.patch
+           echo "Finished 50_add_susfs_in_kernel-4.14"
            echo "Successfully applied susfs-rksu-master patches"
 
       - name: Build kernel
