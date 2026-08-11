@@ -41,7 +41,7 @@ on:
       gpu_max:
         description: "GPU max MHz (for OC tables, default: 702)"
         required: true
-        default: "962"
+        default: "1144"
         type: choice
         options:
           - "100"
@@ -78,7 +78,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
 
       - name: Resolve model code
         id: model
@@ -101,6 +101,11 @@ jobs:
             clang \
             cpio \
             flex \
+            curl \
+            git-core \
+            zlib1g-dev \
+            libc6-dev-i386 \
+            lib32z1-dev \
             libelf-dev \
             libncurses-dev \
             libssl-dev \
@@ -131,6 +136,30 @@ jobs:
           ccache --max-size=3G
           ccache -s
 
+      - name: "Setup KernelSu"
+        run: |
+          if [ -d "./KernelSU" ]; then rm -rf "./KernelSU"; fi
+          if [ -d "./drivers/KernelSU" ]; then rm -rf "./drivers/KernelSU"; fi 
+
+          echo "🔧 Using susfs-rksu-master branch for KernelSU"
+          curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s susfs-rksu-master
+
+      - name: "Clone susfs4ksu repository"
+        run: |
+          git clone https://github.com/Star-Seven/susfs4ksu -b M62-backport-Susfs susfs4ksu-repo
+
+      - name: "Apply susfs-rksu-master patches"
+        run: |
+           set -e
+
+           echo "Applying susfs-rksu-master specific patches..."
+           cp susfs4ksu-repo/kernel_patches/fs/* fs/
+           cp susfs4ksu-repo/kernel_patches/include/linux/* include/linux/
+           
+           patch -p1 --verbose < susfs4ksu-repo/kernel_patches/kernel-4.14.patch
+           patch -p1 --verbose < susfs4ksu-repo/kernel_patches/50_add_susfs_in_kernel-4.14.patch
+           echo "Successfully applied susfs-rksu-master patches"
+
       - name: Build kernel
         run: |
           chmod +x build.sh
@@ -146,7 +175,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: kernel-build-${{ steps.model.outputs.model_code }}-ksu${{ inputs.include_ksu }}-rec${{ inputs.recovery }}-gpu${{ inputs.gpu_max }}
+          name: susfs-rksu-kernel-build-${{ steps.model.outputs.model_code }}-ksu${{ inputs.include_ksu }}-rec${{ inputs.recovery }}-gpu${{ inputs.gpu_max }}
           path: |
             build/out/**/Image
             build/out/**/boot.img
