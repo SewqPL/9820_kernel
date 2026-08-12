@@ -425,28 +425,28 @@
 
 		energy-data {
 			ANANKE_ENERGY: ananke-energy {
-				capacity-mips = <272>;
-				power-coefficient = <160>;
-				capacity-mips-s = <225>;
-				power-coefficient-s = <135>;
+				capacity-mips = <320>;
+				power-coefficient = <100>;
+				capacity-mips-s = <220>;
+				power-coefficient-s = <90>;
 
 				capacity-weight = <1>;
 				energy-weight = <1>;
 			};
 			PROMETHEUS_ENERGY: prometheus-energy {
-				capacity-mips = <531>;
-				power-coefficient = <330>;
-				capacity-mips-s = <360>;
-				power-coefficient-s = <270>;
+				capacity-mips = <720>;
+				power-coefficient = <300>;
+				capacity-mips-s = <380>;
+				power-coefficient-s = <240>;
 
 				capacity-weight = <2>;
 				energy-weight = <1>;
 			};
 			CHEETAH_ENERGY: cheetah-energy {
-				capacity-mips = <780>;
-				power-coefficient = <760>;
-				capacity-mips-s = <385>;
-				power-coefficient-s = <530>;
+				capacity-mips = <720>;
+				power-coefficient = <1200>;
+				capacity-mips-s = <240>;
+				power-coefficient-s = <800>;
 
 				capacity-weight = <1>;
 				energy-weight = <3>;
