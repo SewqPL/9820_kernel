@@ -328,15 +328,14 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 	unsigned int freq = arch_scale_freq_invariant() ?
 				policy->max : policy->cur;
 
-	freq = (freq + (freq >> 2)) * util / max;
+	freq = map_util_freq((util * 900) / 1024, freq, max);
 
 	if (freq == sg_policy->cached_raw_freq && sg_policy->next_freq != UINT_MAX)
 		return sg_policy->next_freq;
 	sg_policy->cached_raw_freq = freq;
-	freq = cpufreq_driver_resolve_freq(policy, freq);
 	trace_cpu_frequency_sugov(freq, util, policy->cpu);
 
-	return freq;
+	return cpufreq_driver_resolve_freq(policy, freq);
 }
 
 static void sugov_get_util(unsigned long *util, unsigned long *max, int cpu)
