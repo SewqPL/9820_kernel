@@ -270,12 +270,13 @@ static inline bool dbg_snapshot_dumper_one(void *v_dumper,
 {
 	return false;
 }
+#ifdef CONFIG_DEBUG_SNAPSHOT
 static int dbg_snapshot_add_bl_item_info(const char *name,
 				unsigned int paddr, unsigned int size)
 {
 	return 0;
 }
-
+#endif
 #endif /* CONFIG_DEBUG_SNAPSHOT */
 
 extern void dbg_snapshot_soc_helper_init(void);
