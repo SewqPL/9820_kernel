@@ -90,3 +90,6 @@ obj-$(CONFIG_EXYNOS_CPU_PERF)	+= exynos_cpu_perf/
 
 # state notifier
 obj-$(CONFIG_STATE_NOTIFIER)	+= state_notifier.o
+
+# Dummy file for disabling SEC_DEBUG 
+obj-y += sec_dummy.o

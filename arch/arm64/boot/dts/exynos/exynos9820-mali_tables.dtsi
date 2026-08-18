@@ -57,4 +57,4 @@ gpu_cl_pmqos_table = <
 
 gpu_max_clock = <1144000>;
 gpu_max_clock_limit = <1144000>;
-gpu_min_clock = <100000>;
+gpu_min_clock = <325000>;
