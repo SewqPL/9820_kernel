@@ -236,7 +236,7 @@ extern void dbg_snapshot_get_softlockup_info(unsigned int cpu, void *info);
 #define dbg_snasshot_get_sjtag_status() do { } while (0)
 #define dbg_snapshot_set_debug_level(a)	do { } while (0)
 #define dbg_snapshot_get_debug_level()	do { } while(0)
-#define dbg_snapshot_get_debug_level_reg()	do { } while (0)
+#define dbg_snapshot_get_debug_level_reg()	(0)
 #define dbg_snapshot_check_crash_key(a,b)	do { } while(0)
 #define dbg_snapshot_dm(a,b,c,d,e)		do { } while(0)
 #define dbg_snapshot_panic_handler_safe()	do { } while(0)
