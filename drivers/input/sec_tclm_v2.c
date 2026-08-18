@@ -9,7 +9,6 @@
  *
  */
 
-#include <linux/module.h>
 #include <linux/input/sec_tclm_v2.h>
 #include <linux/input.h>
 

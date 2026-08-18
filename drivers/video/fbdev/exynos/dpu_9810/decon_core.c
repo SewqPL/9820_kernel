@@ -84,9 +84,7 @@ void tracing_mark_write(struct decon_device *decon, char id, char *str1, int val
 		decon_err("%s:argument fail\n", __func__);
 		return;
 	}
-#if 0
 	trace_puts(buf);
-#endif
 
 }
 
