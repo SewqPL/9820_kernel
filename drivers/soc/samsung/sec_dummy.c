@@ -12,3 +12,22 @@ ALIGN8 int s3c2410wdt_set_emergency_reset(unsigned int timeout, int index) { ret
 ALIGN8 void sec_debug_set_extra_info_rvd1(void) {}
 ALIGN8 int trace_puts(const char *str) { return 0; }
 // ALIGN8 int tracing_mark_write(const char *buf, unsigned int count) { return 0; }
+ALIGN8 bool dbg_snapshot_debug_test_enabled(void) { return false; }
+ALIGN8 u32 dbg_snapshot_get_debug_test_run(void) { return 0; }
+ALIGN8 void dbg_snapshot_set_debug_test_reg(u32 val) {}
+ALIGN8 void dbg_snapshot_print_notifier_call(const char *name) {}
+
+ALIGN8 u32 dbg_snapshot_get_debug_test_next(void) { return 0; }
+ALIGN8 void dbg_snapshot_set_debug_test_case(u32 val) {}
+ALIGN8 void dbg_snapshot_set_debug_test_next(u32 val) {}
+ALIGN8 void dbg_snapshot_set_debug_test_run(u32 val) {}
+ALIGN8 void dbg_snapshot_set_debug_test_panic(void) {}
+ALIGN8 void dbg_snapshot_set_debug_test_wdt(void) {}
+ALIGN8 void dbg_snapshot_set_debug_test_wtsr(void) {}
+ALIGN8 void dbg_snapshot_set_debug_test_smpl(void) {}
+ALIGN8 void dbg_snapshot_set_debug_test_curr(void) {}
+
+ALIGN8 struct dbg_snapshot_soc_operations dss_soc_ops = {
+    .err_parse = NULL,
+    .dump_cpu_reg = NULL,
+};
