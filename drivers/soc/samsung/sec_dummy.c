@@ -1,3 +1,12 @@
+#include <linux/types.h>
+#include <linux/kernel.h>
+#include <linux/errno.h>
+#include <linux/stddef.h>
+#include <linux/printk.h>
+#include <linux/debug-snapshot.h>
+#include <linux/bug.h>
+#include <stdbool.h>
+
 #define ALIGN8 __attribute__((aligned(8)))
 
 ALIGN8 unsigned long __debug_sj_lock = 0;
