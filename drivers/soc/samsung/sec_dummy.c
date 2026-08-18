@@ -1,7 +1,6 @@
 #define ALIGN8 __attribute__((aligned(8)))
 
 ALIGN8 unsigned long __debug_sj_lock = 0;
-ALIGN8 unsigned long dump_callbacks = 0;
 ALIGN8 void exynos_ss_uart(void) {}
 ALIGN8 void exynos_ss_save_log(void) {}
 ALIGN8 void dbg_snapshot_save_log(void) {}
