@@ -5946,12 +5946,12 @@
 					type = "active";
 				};
 				gpu_switch_on: gpu-switch-on {
-					temperature = <76000>; /* millicelsius */
+					temperature = <65000>; /* millicelsius */
 					hysteresis = <2000>; /* millicelsius */
 					type = "active";
 				};
 				gpu_control_temp: gpu-control-temp {
-					temperature = <90000>; /* millicelsius */
+					temperature = <74000>; /* millicelsius */
 					hysteresis = <3000>; /* millicelsius */
 					type = "passive";
 				};
