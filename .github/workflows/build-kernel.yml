@@ -41,7 +41,7 @@ on:
       gpu_max:
         description: "GPU max MHz (for OC tables, default: 702)"
         required: true
-        default: "1144"
+        default: "962"
         type: choice
         options:
           - "100"
@@ -141,8 +141,8 @@ jobs:
           if [ -d "./KernelSU" ]; then rm -rf "./KernelSU"; fi
           if [ -d "./drivers/KernelSU" ]; then rm -rf "./drivers/KernelSU"; fi 
 
-          echo "🔧 Using susfs-rksu-master branch for KernelSU"
-          curl -LSs "https://raw.githubusercontent.com/cyberc3dr/KernelSU/main/kernel/setup.sh" | bash -s susfs-rksu-master
+          echo "Using susfs-rksu-master branch for KernelSU"
+          curl -LSs "https://raw.githubusercontent.com/cyberc3dr/KernelSU/master/kernel/setup.sh" | bash -s susfs-rksu-master
 
       - name: Build kernel
         run: |
