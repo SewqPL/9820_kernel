@@ -142,7 +142,7 @@ jobs:
           if [ -d "./drivers/KernelSU" ]; then rm -rf "./drivers/KernelSU"; fi 
 
           echo "Using susfs-rksu-master branch for KernelSU"
-          curl -LSs "https://raw.githubusercontent.com/cyberc3dr/KernelSU/master/kernel/setup.sh" | bash -s susfs-rksu-master
+          curl -LSs "https://raw.githubusercontent.com/cyberc3dr/KernelSU/susfs-rksu-master/kernel/setup.sh" | bash -s susfs-rksu-master
 
       - name: Build kernel
         run: |
