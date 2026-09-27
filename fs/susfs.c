@@ -371,7 +371,7 @@ bool susfs_is_inode_sus_path(struct inode *inode) {
 static DEFINE_SPINLOCK(susfs_spin_lock_sus_mount);
 bool susfs_hide_sus_mnts_for_all_procs = true; // hide sus mounts for all processes by default
 
-void susfs_set_hide_sus_mnts_for_all_procs(void __user **user_info) {
+void susfs_set_hide_sus_mnts_for_non_su_procs(void __user **user_info) {
 	struct st_susfs_hide_sus_mnts_for_all_procs info = {0};
 
 	if (copy_from_user(&info, (struct st_susfs_hide_sus_mnts_for_all_procs __user*)*user_info, sizeof(info))) {
@@ -387,7 +387,7 @@ out_copy_to_user:
 	if (copy_to_user(&((struct st_susfs_hide_sus_mnts_for_all_procs __user*)*user_info)->err, &info.err, sizeof(info.err))) {
 		info.err = -EFAULT;
 	}
-	SUSFS_LOGI("CMD_SUSFS_HIDE_SUS_MNTS_FOR_ALL_PROCS -> ret: %d\n", info.err);
+	SUSFS_LOGI("CMD_SUSFS_HIDE_SUS_MNTS_FOR_NON_SU_PROCS -> ret: %d\n", info.err);
 }
 #endif // #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 
