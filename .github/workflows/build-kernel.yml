@@ -140,12 +140,8 @@ jobs:
         run: |
           rm -rf ./KernelSU ./drivers/KernelSU ./drivers/kernelsu
 
-          echo "Setting up KazeSU v4.3.0"
-          curl -LSs "https://raw.githubusercontent.com/KazeSU/KazeSU/refs/heads/main/kernel/setup.sh" | bash -s v4.3.0
-
-          if [ -d "./KernelSU" ] && git -C "./KernelSU" rev-parse --git-dir >/dev/null 2>&1; then
-            git -C "./KernelSU" checkout v4.3.0 || true
-          fi
+          echo "Cloning KazeSU v4.3.0 from GitHub"
+          git clone --depth 1 --branch v4.3.0 https://github.com/KazeSU/KazeSU.git ./KernelSU
 
           if [ -d "./KernelSU/kernel" ] && [ ! -e "./drivers/kernelsu" ]; then
             ln -s ../KernelSU/kernel ./drivers/kernelsu
