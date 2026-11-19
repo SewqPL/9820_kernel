@@ -21,6 +21,7 @@
 #include <linux/uaccess.h>
 #include <asm/unistd.h>
 #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+#include <linux/susfs_def.h>
 extern bool susfs_is_inode_sus_kstat(struct inode *inode, bool *out_is_fuse);
 extern void susfs_sus_kstat_spoof_generic_fillattr(struct inode *inode, struct kstat *stat, u32 result_mask);
 #endif // #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
