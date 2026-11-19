@@ -142,6 +142,7 @@ jobs:
 
           echo "Cloning KazeSU v4.3.0 from GitHub"
           git clone --depth 1 --branch v4.3.0 https://github.com/KazeSU/KazeSU.git ./KernelSU
+          git -C ./KernelSU apply ../kazesu_4.14.patch
 
           if [ -d "./KernelSU/kernel" ] && [ ! -e "./drivers/kernelsu" ]; then
             ln -s ../KernelSU/kernel ./drivers/kernelsu
