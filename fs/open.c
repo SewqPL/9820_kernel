@@ -358,10 +358,13 @@ SYSCALL_DEFINE4(fallocate, int, fd, int, mode, loff_t, offset, loff_t, len)
 	return error;
 }
 
-#ifdef CONFIG_KSU
-__attribute__((hot)) 
-extern int ksu_handle_faccessat(int *dfd, const char __user **filename_user,
-				int *mode, int *flags);
+/* originsu-hooks-4.14 */
+#if defined(CONFIG_KSU) && defined(CONFIG_KSU_SUSFS)
+extern int ksu_handle_faccessat(int *dfd, struct filename **filename, int *mode, int *flags);
+extern int filename_lookup(int dfd, struct filename *name, unsigned flags,
+			   struct path *path, struct path *root);
+#elif defined(CONFIG_KSU)
+extern int ksu_handle_faccessat(int *dfd, const char __user **filename_user, int *mode, int *flags);
 #endif
 
 /*
@@ -380,7 +383,7 @@ SYSCALL_DEFINE3(faccessat, int, dfd, const char __user *, filename, int, mode)
 	int res;
 	unsigned int lookup_flags = LOOKUP_FOLLOW;
 
-#ifdef CONFIG_KSU
+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_SUSFS)
 	ksu_handle_faccessat(&dfd, &filename, &mode, NULL);
 #endif
 
@@ -425,7 +428,15 @@ SYSCALL_DEFINE3(faccessat, int, dfd, const char __user *, filename, int, mode)
 
 	old_cred = override_creds(override_cred);
 retry:
+#if defined(CONFIG_KSU) && defined(CONFIG_KSU_SUSFS)
+	{
+		struct filename *ksu_fname = getname_flags(filename, lookup_flags, NULL);
+		ksu_handle_faccessat(&dfd, &ksu_fname, &mode, NULL);
+		res = filename_lookup(dfd, ksu_fname, lookup_flags, &path, NULL); /* puts the name */
+	}
+#else
 	res = user_path_at(dfd, filename, lookup_flags, &path);
+#endif
 	if (res)
 		goto out;
 
