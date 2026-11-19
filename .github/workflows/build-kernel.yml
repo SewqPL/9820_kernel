@@ -135,6 +135,23 @@ jobs:
           echo "CCACHE_SLOPPINESS=file_macro,locale,time_macros" >> "$GITHUB_ENV"
           ccache --max-size=3G
           ccache -s
+
+      - name: "Setup KernelSu"
+        run: |
+          rm -rf ./KernelSU ./drivers/KernelSU ./drivers/kernelsu
+
+          echo "Setting up KazeSU v4.3.0"
+          curl -LSs "https://raw.githubusercontent.com/KazeSU/KazeSU/refs/heads/main/kernel/setup.sh" | bash -s v4.3.0
+
+          if [ -d "./KernelSU" ] && git -C "./KernelSU" rev-parse --git-dir >/dev/null 2>&1; then
+            git -C "./KernelSU" checkout v4.3.0 || true
+          fi
+
+          if [ -d "./KernelSU/kernel" ] && [ ! -e "./drivers/kernelsu" ]; then
+            ln -s ../KernelSU/kernel ./drivers/kernelsu
+          elif [ -d "./drivers/KernelSU" ] && [ ! -e "./drivers/kernelsu" ]; then
+            ln -s KernelSU ./drivers/kernelsu
+          fi
           
       - name: Build kernel
         run: |
